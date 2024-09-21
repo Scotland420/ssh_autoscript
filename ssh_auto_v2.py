@@ -41,11 +41,11 @@ def ssh_to_host(hostname, username, password):
 # Function to handle SSH attempts
 def main():
     # Parse command-line arguments
-    parser = argparse.ArgumentParser(description="SSH into multiple machines and log successes/failures")
+    parser = argparse.ArgumentParser(description="SSH into multiple machines and log successes")
     parser.add_argument('-u', '--username', required=True, help="SSH username")
     parser.add_argument('-p', '--password', required=True, help="SSH password")
     parser.add_argument('-l', '--list', default='list.txt', help="File containing list of hosts")
-    parser.add_argument('-o', '--output', default='ssh_success_log.txt', help="File to write success/failure logs")
+    parser.add_argument('-o', '--output', default='ssh_success_log.txt', help="File to write success logs")
     
     args = parser.parse_args()
 
@@ -62,11 +62,12 @@ def main():
             # Attempt SSH connection
             result = ssh_to_host(host, args.username, args.password)
             
-            # Log the result to the file
-            log.write(f"{result}: {host}\n")
-            
             # Print the result to the terminal
             print(f"{result}: {host}")
+            
+            # Only write successful connections to the log file
+            if result == "Success":
+                log.write(f"Success: SSH to {host} was successful.\n")
             
             # Sleep between connections to avoid rapid retries
             time.sleep(1)
