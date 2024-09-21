@@ -1,4 +1,4 @@
-# ssh_autoscript
+# SSH AutoConnect Logger
 Pulls from list (hosts or ip's) to verify ssh login
 
 Writes to the output file if the connection is successful (when result == "Success")
