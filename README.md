@@ -1,6 +1,8 @@
 # ssh_autoscript
 Pulls from list (hosts or ip's) to verify ssh login
 
+Writes to the output file if the connection is successful (when result == "Success")
+
 	Command-line arguments/usage:
     -u or --username: Specify the SSH username.
     -p or --password: Specify the SSH password.
